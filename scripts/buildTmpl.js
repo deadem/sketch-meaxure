@@ -21,6 +21,9 @@ compiler.run((err, stats) => {
     }
     let template = makeTemplate(outputFileSystem, __dirname + '/index.js');
     let templatePath = path.resolve(skpmConfig.main, 'Contents', 'Resources', 'template.html');
+    if (!fs.existsSync(path.dirname(templatePath))){
+        fs.mkdirSync(path.dirname(templatePath), { recursive: true });
+    }
     fs.writeFileSync(templatePath, template);
 });
 
